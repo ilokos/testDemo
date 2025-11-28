@@ -1,5 +1,6 @@
 const Customer = require('../models/Customer');
 const { validationResult } = require('express-validator');
+const mongoose = require('mongoose');
 
 // Display customer creation form
 exports.getCreateForm = (req, res) => {
@@ -79,6 +80,14 @@ exports.getAllCustomers = async (req, res) => {
 // Get single customer by ID
 exports.getCustomer = async (req, res) => {
   try {
+    // Validate ObjectId format
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).render('error', {
+        title: 'Invalid ID',
+        message: 'The customer ID format is invalid'
+      });
+    }
+
     const customer = await Customer.findById(req.params.id);
     if (!customer) {
       return res.status(404).render('error', {
