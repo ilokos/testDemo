@@ -1,0 +1,44 @@
+<%- include('../partials/header') %>
+
+<div class="page-header">
+  <h1>Customer List</h1>
+  <a href="/customers/create" class="btn btn-primary">Add New Customer</a>
+</div>
+
+<% if (customers && customers.length > 0) { %>
+  <div class="table-container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>City</th>
+          <th>Created</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% customers.forEach(customer => { %>
+          <tr>
+            <td><%= customer.firstName %> <%= customer.lastName %></td>
+            <td><%= customer.email %></td>
+            <td><%= customer.phone || '-' %></td>
+            <td><%= customer.address?.city || '-' %></td>
+            <td><%= customer.createdAt.toLocaleDateString() %></td>
+            <td>
+              <a href="/customers/<%= customer._id %>" class="btn btn-sm">View</a>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </div>
+<% } else { %>
+  <div class="empty-state">
+    <p>No customers found.</p>
+    <a href="/customers/create" class="btn btn-primary">Create your first customer</a>
+  </div>
+<% } %>
+
+<%- include('../partials/footer') %>

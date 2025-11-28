@@ -1,0 +1,72 @@
+<%- include('../partials/header') %>
+
+<div class="page-header">
+  <h1>Customer Details</h1>
+  <a href="/customers" class="btn btn-secondary">Back to List</a>
+</div>
+
+<div class="customer-details">
+  <div class="detail-section">
+    <h2>Personal Information</h2>
+    <div class="detail-grid">
+      <div class="detail-item">
+        <label>Full Name</label>
+        <span><%= customer.firstName %> <%= customer.lastName %></span>
+      </div>
+      <div class="detail-item">
+        <label>Email</label>
+        <span><%= customer.email %></span>
+      </div>
+      <div class="detail-item">
+        <label>Phone</label>
+        <span><%= customer.phone || 'Not provided' %></span>
+      </div>
+      <div class="detail-item">
+        <label>Date of Birth</label>
+        <span><%= customer.dateOfBirth ? customer.dateOfBirth.toLocaleDateString() : 'Not provided' %></span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="detail-section">
+    <h2>Address</h2>
+    <div class="detail-grid">
+      <div class="detail-item">
+        <label>Street</label>
+        <span><%= customer.address?.street || 'Not provided' %></span>
+      </div>
+      <div class="detail-item">
+        <label>City</label>
+        <span><%= customer.address?.city || 'Not provided' %></span>
+      </div>
+      <div class="detail-item">
+        <label>State/Province</label>
+        <span><%= customer.address?.state || 'Not provided' %></span>
+      </div>
+      <div class="detail-item">
+        <label>Zip/Postal Code</label>
+        <span><%= customer.address?.zipCode || 'Not provided' %></span>
+      </div>
+      <div class="detail-item">
+        <label>Country</label>
+        <span><%= customer.address?.country || 'Not provided' %></span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="detail-section">
+    <h2>Record Information</h2>
+    <div class="detail-grid">
+      <div class="detail-item">
+        <label>Created</label>
+        <span><%= customer.createdAt.toLocaleString() %></span>
+      </div>
+      <div class="detail-item">
+        <label>Last Updated</label>
+        <span><%= customer.updatedAt.toLocaleString() %></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>
